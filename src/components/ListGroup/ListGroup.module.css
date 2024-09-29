@@ -1,0 +1,9 @@
+.remove-btn {
+  color: rgba(218, 83, 83, 0.854);
+  size: 20px;
+  float: right;
+}
+
+.list-group-item {
+  text-align: left;
+}
