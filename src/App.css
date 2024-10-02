@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+
+.container {
+  display: flex;
+}
+
+.participant-manager-container {
+  align-items: center;
+  margin-left: 20px;
+}
+
+.generate-button {
+  padding: 8px;
+  margin: 20px;
+  width: 320px;
+}

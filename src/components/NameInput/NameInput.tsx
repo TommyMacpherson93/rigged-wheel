@@ -19,6 +19,7 @@ function NameInput({ onClick }: Props) {
           placeholder="Lucky Participant"
           aria-label="Lucky Participant"
           aria-describedby="button-addon2"
+          value={input}
           onInput={(e) => {
             setInput((e.target as HTMLInputElement).value);
           }}
@@ -27,7 +28,10 @@ function NameInput({ onClick }: Props) {
           className={`btn btn-outline-secondary ${styles["add-btn"]}`}
           type="button"
           id="button-addon2"
-          onClick={() => onClick(input)}
+          onClick={() => {
+            onClick(input);
+            setInput("");
+          }}
         >
           <MdAddCircle size="20px" />
         </button>

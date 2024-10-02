@@ -1,30 +1,71 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-import NameInput from "./components/NameInput";
-import ListGroup from "./components/ListGroup";
+import Wheel from "./components/Wheel";
+import ParticipantTracker from "./components/ParticipantTracker";
 import { useState } from "react";
 
 function App() {
-  const [items, setItems] = useState(["Name A", "Name B"]);
+  const [showWheel, setShowWheel] = useState(false);
+  const [participants, setParticipants] = useState<string[]>([]);
+  const colours = [
+    "Blue",
+    "Green",
+    "Red",
+    "Orange",
+    "Purple",
+    "Cyan",
+    "Pink",
+    "Grey",
+  ];
+
+  const getSegments = () => {
+    const segments = [];
+
+    for (var participant of participants) {
+      const colour_idx = Math.floor(Math.random() * colours.length);
+      const colour = colours[colour_idx];
+      segments.push({
+        segmentText: "Austeen",
+        segColor: colour,
+      });
+    }
+
+    return segments;
+  };
 
   // TODO - use immer
-  const addItem = (item: string) => {
-    if (items.includes(item)) {
-      console.log(`Items already contains element ${item}`);
+  const addParticipant = (participant: string) => {
+    if (participants.includes(participant)) {
+      console.log(`Items already contains element ${participant}`);
       return;
     }
 
-    setItems([...items, item]);
+    setParticipants([...participants, participant]);
   };
 
-  const removeName = (name: string) => {
-    setItems(items.filter((item) => item !== name));
+  const removeParticipant = (participant: string) => {
+    setParticipants(participants.filter((item) => item !== participant));
   };
 
   return (
     <>
-      <NameInput onClick={addItem} />
-      <ListGroup items={items} onClick={removeName} />
+      <div className="container">
+        {showWheel ? <Wheel segments={getSegments()} /> : null}
+        <div className="participant-manager-container">
+          <ParticipantTracker
+            participants={participants}
+            addParticipant={addParticipant}
+            removeParticipant={removeParticipant}
+          />
+          <button
+            type="button"
+            className="btn btn-success generate-button"
+            onClick={() => setShowWheel(true)}
+          >
+            Generate Wheel
+          </button>
+        </div>
+      </div>
     </>
   );
 }
