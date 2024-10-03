@@ -1,7 +1,7 @@
 import { MdAddCircle } from "react-icons/md";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./NameInput.module.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface Props {
   onClick: (name: string) => void;
@@ -9,6 +9,7 @@ interface Props {
 
 function NameInput({ onClick }: Props) {
   const [input, setInput] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
@@ -20,6 +21,7 @@ function NameInput({ onClick }: Props) {
           aria-label="Lucky Participant"
           aria-describedby="button-addon2"
           value={input}
+          ref={inputRef}
           onInput={(e) => {
             setInput((e.target as HTMLInputElement).value);
           }}
@@ -31,6 +33,9 @@ function NameInput({ onClick }: Props) {
           onClick={() => {
             onClick(input);
             setInput("");
+            if (inputRef.current) {
+              inputRef.current.focus(); // Maintain focus on the input field
+            }
           }}
         >
           <MdAddCircle size="20px" />

@@ -7,27 +7,22 @@ import { useState } from "react";
 function App() {
   const [showWheel, setShowWheel] = useState(false);
   const [participants, setParticipants] = useState<string[]>([]);
-  const colours = [
-    "Blue",
-    "Green",
-    "Red",
-    "Orange",
-    "Purple",
-    "Cyan",
-    "Pink",
-    "Grey",
-  ];
+  const colours = ["Blue", "Green", "Red", "Orange", "Purple", "Cyan", "Pink"];
 
   const getSegments = () => {
     const segments = [];
+    let reusableColours = [...colours];
 
     for (var participant of participants) {
-      const colour_idx = Math.floor(Math.random() * colours.length);
-      const colour = colours[colour_idx];
-      segments.push({
-        segmentText: "Austeen",
-        segColor: colour,
-      });
+      if (reusableColours.length === 0) reusableColours = [...colours];
+
+      const segColour = reusableColours.pop();
+      if (segColour) {
+        segments.push({
+          segmentText: "Austeen",
+          segColor: segColour,
+        });
+      }
     }
 
     return segments;

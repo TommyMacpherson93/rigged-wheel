@@ -22,10 +22,10 @@ function Wheel({ segments }: Props) {
     isOnlyOnce: false,
     size: 290,
     upDuration: 500,
-    downDuration: 2000,
+    downDuration: 3000,
     fontFamily: "Arial",
     arrowLocation: "top",
-    showTextOnSpin: true,
+    showTextOnSpin: false,
     isSpinSound: true,
   };
 
