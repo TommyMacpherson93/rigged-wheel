@@ -11,6 +11,14 @@ function NameInput({ onClick }: Props) {
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const handleInputAction = () => {
+    onClick(input);
+    setInput("");
+    if (inputRef.current) {
+      inputRef.current.focus(); // Maintain focus on the input field
+    }
+  };
+
   return (
     <>
       <div className="input-group mb-3">
@@ -25,17 +33,18 @@ function NameInput({ onClick }: Props) {
           onInput={(e) => {
             setInput((e.target as HTMLInputElement).value);
           }}
+          onKeyUp={(event) => {
+            if (event.key === "Enter") {
+              handleInputAction();
+            }
+          }}
         />
         <button
           className={`btn btn-outline-secondary ${styles["add-btn"]}`}
           type="button"
           id="button-addon2"
           onClick={() => {
-            onClick(input);
-            setInput("");
-            if (inputRef.current) {
-              inputRef.current.focus(); // Maintain focus on the input field
-            }
+            handleInputAction();
           }}
         >
           <MdAddCircle size="20px" />

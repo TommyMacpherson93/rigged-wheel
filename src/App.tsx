@@ -7,7 +7,17 @@ import { useState } from "react";
 function App() {
   const [showWheel, setShowWheel] = useState(false);
   const [participants, setParticipants] = useState<string[]>([]);
-  const colours = ["Blue", "Green", "Red", "Orange", "Purple", "Cyan", "Pink"];
+  const colours = [
+    "Blue",
+    "Green",
+    "Red",
+    "Orange",
+    "Purple",
+    "Indigo",
+    "Pink",
+    "Brown",
+    "Black",
+  ];
 
   const getSegments = () => {
     const segments = [];
